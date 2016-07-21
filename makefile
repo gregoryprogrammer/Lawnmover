@@ -1,0 +1,2 @@
+all:
+	lime test neko
