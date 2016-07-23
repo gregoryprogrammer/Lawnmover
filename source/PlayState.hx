@@ -13,6 +13,8 @@ import flixel.tweens.FlxEase;
 
 import haxe.io.Path;
 
+import openfl.Assets;
+
 import Config.Config;
 import Instruction.Action;
 
@@ -112,7 +114,7 @@ class PlayState extends FlxState
 
                 level_files.sort(function(a, b) {if (a < b) return -1; return 1;});
 
-                var content = sys.io.File.getContent("assets/data/levels.json");
+                var content = Assets.getText("assets/data/levels.json");
                 var layers:{layers:Array<Dynamic>} = haxe.Json.parse(content);
 
                 for (layer in layers.layers) {
