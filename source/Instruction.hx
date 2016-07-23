@@ -174,7 +174,7 @@ class Instruction extends FlxGroup
                 m_false_choices.add_choice(0, 0, "PASS", function() { action_false = PASS; });
                 m_false_choices.add_choice(0, 1, "GO", function() { action_false = GO; });
                 m_false_choices.add_choice(0, 2, "TURN LEFT", function() { action_false = TURN_LEFT; });
-                m_false_choices.add_choice(0, 3, "TURN RIGHT", function() { action_false = TURN_LEFT; });
+                m_false_choices.add_choice(0, 3, "TURN RIGHT", function() { action_false = TURN_RIGHT; });
                 m_false_choices.add_choice(0, 4, "CUT", function() { action_false = CUT; });
 
                 m_false_choices.add_choice(1, 0, "JUMP 00", function() { action_false = JUMP(0); });
