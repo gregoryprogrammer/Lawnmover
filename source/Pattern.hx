@@ -192,6 +192,16 @@ class Pattern extends FlxGroup
                 return {x: Std.int(mx), y: Std.int(my)};
         }
 
+        public function set_tiles(tiles:Array<Tile>):Void
+        {
+            m_tiles = tiles;
+        }
+
+        public function get_tiles():Array<Tile>
+        {
+            return m_tiles;
+        }
+
         public function get_tile(_position:TilePosition):Tile
         {
                 // TODO check

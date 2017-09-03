@@ -17,6 +17,7 @@ import openfl.Assets;
 
 import Config.Config;
 import Instruction.Action;
+import Tile.TileType;
 
 using StringTools;
 
@@ -192,15 +193,23 @@ class PlayState extends FlxState
                         m_dim.alpha = 0;
                 }
 
+                // saving program
                 for (i in 0...m_instructions.length) {
                     var action_true = m_instructions[i].action_true;
                     var action_false = m_instructions[i].action_false;
 
                     var idx_true = 2 * i;
                     var idx_false = 2 * i + 1;
-                    var program_arr= Reg.saved_program[Reg.level.name];
+                    var program_arr = Reg.saved_program[Reg.level.name];
                     program_arr[idx_true] = action_true;
                     program_arr[idx_false] = action_false;
+
+                    var pattern_tiles = m_instructions[i].pattern.get_tiles();
+                    for (t in 0...pattern_tiles.length) {
+                        var tile = pattern_tiles[t];
+                        var tile_key = "" + Reg.level.name + "_" + i + "_" + t;
+                        Reg.saved_pattern[tile_key] = tile.type;
+                    }
                 }
         }
 
@@ -231,6 +240,16 @@ class PlayState extends FlxState
 
                     if (action_true != null) m_instructions[i].action_true = action_true;
                     if (action_false != null) m_instructions[i].action_false = action_false;
+
+                    var pattern_tiles = m_instructions[i].pattern.get_tiles();
+                    for (t in 0...9) {
+                        var tile_key = "" + Reg.level.name + "_" + i + "_" + t;
+                        var tile_type = Reg.saved_pattern[tile_key];
+                        if (tile_type != null) {
+                            pattern_tiles[t].type = tile_type;
+                        }
+                    }
+                    m_instructions[i].pattern.set_tiles(pattern_tiles);
                 }
         }
 
