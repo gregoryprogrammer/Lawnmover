@@ -33,6 +33,7 @@ class PlayState extends FlxState
         private var m_main_pattern:Pattern;
         private var m_instructions:Array<Instruction>;
         private var m_dim:FlxSprite;
+        private var m_arrow:FlxSprite;
 
         private var m_current_instruction = 0;
 
@@ -68,6 +69,11 @@ class PlayState extends FlxState
 
                 // gap between instruction columns
                 var x_gap = Std.int(((FlxG.width - Config.FRAME * 2) - Instruction.WIDTH * COLUMNS) / (COLUMNS - 1));
+
+                m_arrow = new FlxSprite();
+                m_arrow.makeGraphic(Instruction.WIDTH + 8, Instruction.HEIGHT + 8, FlxColor.WHITE);
+                m_arrow.visible = true;
+                add(m_arrow);
 
                 m_instructions = new Array();
                 for (i in 0...Instruction.NUM) {
@@ -140,6 +146,8 @@ class PlayState extends FlxState
                 m_phase.push(phase_1_goto_instruction);
                 m_phase.push(phase_2_instruction);
                 m_phase.push(phase_3_action);
+
+                move_arrow();
         }
 
         override public function update(_elapsed:Float):Void
@@ -182,7 +190,14 @@ class PlayState extends FlxState
                         m_dim.visible = false;
                         m_dim.alpha = 0;
                 }
-       }
+        }
+
+        function move_arrow():Void
+        {
+                var instruction = m_instructions[m_current_instruction];
+                m_arrow.x = instruction.x - 4;
+                m_arrow.y = instruction.y - 4;
+        }
 
         function load_level(_level:Dynamic):Void
         {
@@ -242,7 +257,9 @@ class PlayState extends FlxState
 
         function on_stop_button():Void
         {
+                m_current_instruction = 0;
                 m_started = false;
+                move_arrow();
         }
 
         function on_speed_button():Void
@@ -302,6 +319,7 @@ class PlayState extends FlxState
                 //trace("----- step -----");
                 //trace("current instruction = " + m_current_instruction);
                 // TODO pointer arrow
+                move_arrow();
         }
 
         /**
