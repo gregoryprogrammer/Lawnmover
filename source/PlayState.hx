@@ -117,11 +117,12 @@ class PlayState extends FlxState
                 var layers:{layers:Array<Dynamic>} = haxe.Json.parse(content);
 
                 for (layer in layers.layers) {
+                        Reg.saved_program[layer.name] = new Array<Action>();
                         level_box.add_entry(layer.name, function()
                                 {
                                         Reg.level = layer;
-                                        load_level(Reg.level);
                                         clear_program();
+                                        load_level(Reg.level);
                                 });
                 }
 
@@ -190,6 +191,17 @@ class PlayState extends FlxState
                         m_dim.visible = false;
                         m_dim.alpha = 0;
                 }
+
+                for (i in 0...m_instructions.length) {
+                    var action_true = m_instructions[i].action_true;
+                    var action_false = m_instructions[i].action_false;
+
+                    var idx_true = 2 * i;
+                    var idx_false = 2 * i + 1;
+                    var program_arr= Reg.saved_program[Reg.level.name];
+                    program_arr[idx_true] = action_true;
+                    program_arr[idx_false] = action_false;
+                }
         }
 
         function move_arrow():Void
@@ -206,6 +218,20 @@ class PlayState extends FlxState
                 var height = _level.height;
 
                 m_main_pattern.load_lawn(width, height, data);
+
+                // TODO load program for this level
+
+                var program = Reg.saved_program[_level.name];
+
+                for (i in 0...m_instructions.length) {
+                    var idx_true = 2 * i;
+                    var idx_false = 2 * i + 1;
+                    var action_true = program[idx_true];
+                    var action_false = program[idx_false];
+
+                    if (action_true != null) m_instructions[i].action_true = action_true;
+                    if (action_false != null) m_instructions[i].action_false = action_false;
+                }
         }
 
         function logic(_elapsed:Float):Void
