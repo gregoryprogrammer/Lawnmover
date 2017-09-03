@@ -125,36 +125,36 @@ class Instruction extends FlxGroup
                 m_true_choices = new Choices();
                 m_true_choices.hide();
 
-                m_true_choices.add_choice(0, 0, "PASS", function() { action_true = PASS; });
-                m_true_choices.add_choice(0, 1, "GO", function() { action_true = GO; });
-                m_true_choices.add_choice(0, 2, "TURN LEFT", function() { action_true = TURN_LEFT; });
-                m_true_choices.add_choice(0, 3, "TURN RIGHT", function() { action_true = TURN_RIGHT; });
-                m_true_choices.add_choice(0, 4, "CUT", function() { action_true = CUT; });
+                m_true_choices.add_choice(0, 0, "NIC", function() { action_true = PASS; });
+                m_true_choices.add_choice(0, 1, "JAZDA", function() { action_true = GO; });
+                m_true_choices.add_choice(0, 2, "W LEWO", function() { action_true = TURN_LEFT; });
+                m_true_choices.add_choice(0, 3, "W PRAWO", function() { action_true = TURN_RIGHT; });
+                m_true_choices.add_choice(0, 4, "TNIJ", function() { action_true = CUT; });
 
-                m_true_choices.add_choice(1, 0, "JUMP 00", function() { action_true = JUMP(0); });
-                m_true_choices.add_choice(1, 1, "JUMP 01", function() { action_true = JUMP(1); });
-                m_true_choices.add_choice(1, 2, "JUMP 02", function() { action_true = JUMP(2); });
-                m_true_choices.add_choice(1, 3, "JUMP 03", function() { action_true = JUMP(3); });
+                m_true_choices.add_choice(1, 0, "SKOK DO 00", function() { action_true = JUMP(0); });
+                m_true_choices.add_choice(1, 1, "SKOK DO 01", function() { action_true = JUMP(1); });
+                m_true_choices.add_choice(1, 2, "SKOK DO 02", function() { action_true = JUMP(2); });
+                m_true_choices.add_choice(1, 3, "SKOK DO 03", function() { action_true = JUMP(3); });
 
-                m_true_choices.add_choice(2, 0, "JUMP 04", function() { action_true = JUMP(4); });
-                m_true_choices.add_choice(2, 1, "JUMP 05", function() { action_true = JUMP(5); });
-                m_true_choices.add_choice(2, 2, "JUMP 06", function() { action_true = JUMP(6); });
-                m_true_choices.add_choice(2, 3, "JUMP 07", function() { action_true = JUMP(7); });
+                m_true_choices.add_choice(2, 0, "SKOK DO 04", function() { action_true = JUMP(4); });
+                m_true_choices.add_choice(2, 1, "SKOK DO 05", function() { action_true = JUMP(5); });
+                m_true_choices.add_choice(2, 2, "SKOK DO 06", function() { action_true = JUMP(6); });
+                m_true_choices.add_choice(2, 3, "SKOK DO 07", function() { action_true = JUMP(7); });
 
-                m_true_choices.add_choice(3, 0, "JUMP 08", function() { action_true = JUMP(8); });
-                m_true_choices.add_choice(3, 1, "JUMP 09", function() { action_true = JUMP(9); });
-                m_true_choices.add_choice(3, 2, "JUMP 10", function() { action_true = JUMP(10); });
-                m_true_choices.add_choice(3, 3, "JUMP 11", function() { action_true = JUMP(11); });
+                m_true_choices.add_choice(3, 0, "SKOK DO 08", function() { action_true = JUMP(8); });
+                m_true_choices.add_choice(3, 1, "SKOK DO 09", function() { action_true = JUMP(9); });
+                m_true_choices.add_choice(3, 2, "SKOK DO 10", function() { action_true = JUMP(10); });
+                m_true_choices.add_choice(3, 3, "SKOK DO 11", function() { action_true = JUMP(11); });
 
-                m_true_choices.add_choice(4, 0, "JUMP 12", function() { action_true = JUMP(12); });
-                m_true_choices.add_choice(4, 1, "JUMP 13", function() { action_true = JUMP(13); });
-                m_true_choices.add_choice(4, 2, "JUMP 14", function() { action_true = JUMP(14); });
-                m_true_choices.add_choice(4, 3, "JUMP 15", function() { action_true = JUMP(15); });
+                m_true_choices.add_choice(4, 0, "SKOK DO 12", function() { action_true = JUMP(12); });
+                m_true_choices.add_choice(4, 1, "SKOK DO 13", function() { action_true = JUMP(13); });
+                m_true_choices.add_choice(4, 2, "SKOK DO 14", function() { action_true = JUMP(14); });
+                m_true_choices.add_choice(4, 3, "SKOK DO 15", function() { action_true = JUMP(15); });
 
-                m_true_choices.add_choice(5, 0, "JUMP 16", function() { action_true = JUMP(16); });
-                m_true_choices.add_choice(5, 1, "JUMP 17", function() { action_true = JUMP(17); });
-                m_true_choices.add_choice(5, 2, "JUMP 18", function() { action_true = JUMP(18); });
-                m_true_choices.add_choice(5, 3, "JUMP 19", function() { action_true = JUMP(19); });
+                m_true_choices.add_choice(5, 0, "SKOK DO 16", function() { action_true = JUMP(16); });
+                m_true_choices.add_choice(5, 1, "SKOK DO 17", function() { action_true = JUMP(17); });
+                m_true_choices.add_choice(5, 2, "SKOK DO 18", function() { action_true = JUMP(18); });
+                m_true_choices.add_choice(5, 3, "SKOK DO 19", function() { action_true = JUMP(19); });
 
                 m_true_choices.highlight(0, 0);
                 // FIXME
@@ -171,36 +171,36 @@ class Instruction extends FlxGroup
                 m_false_choices = new Choices();
                 m_false_choices.hide();
 
-                m_false_choices.add_choice(0, 0, "PASS", function() { action_false = PASS; });
-                m_false_choices.add_choice(0, 1, "GO", function() { action_false = GO; });
-                m_false_choices.add_choice(0, 2, "TURN LEFT", function() { action_false = TURN_LEFT; });
-                m_false_choices.add_choice(0, 3, "TURN RIGHT", function() { action_false = TURN_RIGHT; });
-                m_false_choices.add_choice(0, 4, "CUT", function() { action_false = CUT; });
+                m_false_choices.add_choice(0, 0, "NIC", function() { action_false = PASS; });
+                m_false_choices.add_choice(0, 1, "JAZDA", function() { action_false = GO; });
+                m_false_choices.add_choice(0, 2, "W LEWO", function() { action_false = TURN_LEFT; });
+                m_false_choices.add_choice(0, 3, "W PRAWO", function() { action_false = TURN_RIGHT; });
+                m_false_choices.add_choice(0, 4, "TNIJ", function() { action_false = CUT; });
 
-                m_false_choices.add_choice(1, 0, "JUMP 00", function() { action_false = JUMP(0); });
-                m_false_choices.add_choice(1, 1, "JUMP 01", function() { action_false = JUMP(1); });
-                m_false_choices.add_choice(1, 2, "JUMP 02", function() { action_false = JUMP(2); });
-                m_false_choices.add_choice(1, 3, "JUMP 03", function() { action_false = JUMP(3); });
+                m_false_choices.add_choice(1, 0, "SKOK DO 00", function() { action_false = JUMP(0); });
+                m_false_choices.add_choice(1, 1, "SKOK DO 01", function() { action_false = JUMP(1); });
+                m_false_choices.add_choice(1, 2, "SKOK DO 02", function() { action_false = JUMP(2); });
+                m_false_choices.add_choice(1, 3, "SKOK DO 03", function() { action_false = JUMP(3); });
 
-                m_false_choices.add_choice(2, 0, "JUMP 04", function() { action_false = JUMP(4); });
-                m_false_choices.add_choice(2, 1, "JUMP 05", function() { action_false = JUMP(5); });
-                m_false_choices.add_choice(2, 2, "JUMP 06", function() { action_false = JUMP(6); });
-                m_false_choices.add_choice(2, 3, "JUMP 07", function() { action_false = JUMP(7); });
+                m_false_choices.add_choice(2, 0, "SKOK DO 04", function() { action_false = JUMP(4); });
+                m_false_choices.add_choice(2, 1, "SKOK DO 05", function() { action_false = JUMP(5); });
+                m_false_choices.add_choice(2, 2, "SKOK DO 06", function() { action_false = JUMP(6); });
+                m_false_choices.add_choice(2, 3, "SKOK DO 07", function() { action_false = JUMP(7); });
 
-                m_false_choices.add_choice(3, 0, "JUMP 08", function() { action_false = JUMP(8); });
-                m_false_choices.add_choice(3, 1, "JUMP 09", function() { action_false = JUMP(9); });
-                m_false_choices.add_choice(3, 2, "JUMP 10", function() { action_false = JUMP(10); });
-                m_false_choices.add_choice(3, 3, "JUMP 11", function() { action_false = JUMP(11); });
+                m_false_choices.add_choice(3, 0, "SKOK DO 08", function() { action_false = JUMP(8); });
+                m_false_choices.add_choice(3, 1, "SKOK DO 09", function() { action_false = JUMP(9); });
+                m_false_choices.add_choice(3, 2, "SKOK DO 10", function() { action_false = JUMP(10); });
+                m_false_choices.add_choice(3, 3, "SKOK DO 11", function() { action_false = JUMP(11); });
 
-                m_false_choices.add_choice(4, 0, "JUMP 12", function() { action_false = JUMP(12); });
-                m_false_choices.add_choice(4, 1, "JUMP 13", function() { action_false = JUMP(13); });
-                m_false_choices.add_choice(4, 2, "JUMP 14", function() { action_false = JUMP(14); });
-                m_false_choices.add_choice(4, 3, "JUMP 15", function() { action_false = JUMP(15); });
+                m_false_choices.add_choice(4, 0, "SKOK DO 12", function() { action_false = JUMP(12); });
+                m_false_choices.add_choice(4, 1, "SKOK DO 13", function() { action_false = JUMP(13); });
+                m_false_choices.add_choice(4, 2, "SKOK DO 14", function() { action_false = JUMP(14); });
+                m_false_choices.add_choice(4, 3, "SKOK DO 15", function() { action_false = JUMP(15); });
 
-                m_false_choices.add_choice(5, 0, "JUMP 16", function() { action_false = JUMP(16); });
-                m_false_choices.add_choice(5, 1, "JUMP 17", function() { action_false = JUMP(17); });
-                m_false_choices.add_choice(5, 2, "JUMP 18", function() { action_false = JUMP(18); });
-                m_false_choices.add_choice(5, 3, "JUMP 19", function() { action_false = JUMP(19); });
+                m_false_choices.add_choice(5, 0, "SKOK DO 16", function() { action_false = JUMP(16); });
+                m_false_choices.add_choice(5, 1, "SKOK DO 17", function() { action_false = JUMP(17); });
+                m_false_choices.add_choice(5, 2, "SKOK DO 18", function() { action_false = JUMP(18); });
+                m_false_choices.add_choice(5, 3, "SKOK DO 19", function() { action_false = JUMP(19); });
 
                 m_false_choices.highlight(0, 0);
 
@@ -251,21 +251,21 @@ class Instruction extends FlxGroup
         function update_action_text():Void
         {
                 switch (action_true) {
-                case PASS: m_action_true.label.text = "PASS";
-                case GO: m_action_true.label.text = "GO";
-                case TURN_LEFT: m_action_true.label.text = "TURN LEFT";
-                case TURN_RIGHT: m_action_true.label.text = "TURN RIGHT";
-                case CUT: m_action_true.label.text = "CUT GRASS";
-                case JUMP(i): m_action_true.label.text = "JUMP_" + StringTools.lpad("" + i, "0", 2);
+                case PASS: m_action_true.label.text = "NIC";
+                case GO: m_action_true.label.text = "JAZDA";
+                case TURN_LEFT: m_action_true.label.text = "W LEWO";
+                case TURN_RIGHT: m_action_true.label.text = "W PRAWO";
+                case CUT: m_action_true.label.text = "TNIJ";
+                case JUMP(i): m_action_true.label.text = "SKOK DO " + StringTools.lpad("" + i, "0", 2);
                 }
 
                 switch (action_false) {
-                case PASS: m_action_false.label.text = "PASS";
-                case GO: m_action_false.label.text = "GO";
-                case TURN_LEFT: m_action_false.label.text = "TURN LEFT";
-                case TURN_RIGHT: m_action_false.label.text = "TURN RIGHT";
-                case CUT: m_action_false.label.text = "CUT GRASS";
-                case JUMP(i): m_action_false.label.text = "JUMP_" + StringTools.lpad("" + i, "0", 2);
+                case PASS: m_action_false.label.text = "NIC";
+                case GO: m_action_false.label.text = "JAZDA";
+                case TURN_LEFT: m_action_false.label.text = "W LEWO";
+                case TURN_RIGHT: m_action_false.label.text = "W PRAWO";
+                case CUT: m_action_false.label.text = "TNIJ";
+                case JUMP(i): m_action_false.label.text = "SKOK DO " + StringTools.lpad("" + i, "0", 2);
                 }
         }
 

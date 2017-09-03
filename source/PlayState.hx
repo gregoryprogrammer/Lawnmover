@@ -37,7 +37,7 @@ class PlayState extends FlxState
         private var m_current_instruction = 0;
 
         private var m_speed_button:FlxButton;
-        private var m_speed:Speed = NORMAL (1);
+        private var m_speed:Speed = NORMAL (4);
 
         var m_started = false;
         var m_phase_cooldown = 0.0;
@@ -54,6 +54,11 @@ class PlayState extends FlxState
                 m_main_pattern.position = new FlxPoint(Config.FRAME, Config.FRAME);
                 m_main_pattern.load_sample_lawn();
                 add(m_main_pattern);
+
+                m_dim = new FlxSprite();
+                m_dim.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+                m_dim.alpha = DIM_ALPHA;
+                m_dim.visible = false;
 
                 // panel with instructions
                 var COLUMNS = 5;
@@ -79,29 +84,17 @@ class PlayState extends FlxState
                 var buttons_y = Config.FRAME + Config.TILE_SIZE * 10;
                 var b_gap = 24;
 
-                var run = new FlxButton(buttons_x, buttons_y + b_gap * 0, "RUN", on_run_button);
+                var run = new FlxButton(buttons_x, buttons_y + b_gap * 0, "START", on_run_button);
                 add(run);
 
                 var stop = new FlxButton(buttons_x, buttons_y + b_gap * 1, "STOP", on_stop_button);
                 add(stop);
 
-                var reset = new FlxButton(buttons_x, buttons_y + b_gap * 2, "CLEAR PROG", clear_program);
+                var reset = new FlxButton(buttons_x, buttons_y + b_gap * 2, "SKASUJ", clear_program);
                 add(reset);
 
-                m_speed_button = new FlxButton(buttons_x, buttons_y + b_gap * 3, "SPEED 1", on_speed_button);
+                m_speed_button = new FlxButton(buttons_x, buttons_y + b_gap * 3, "PREDKOSC 4", on_speed_button);
                 add(m_speed_button);
-
-                // create_choices should be execute after creation of all instructions and buttons,
-                // so choices will be on top of every instruction (prevent sprite overlapping)
-                for (instruction in m_instructions) {
-                        var true_choices = instruction.create_true_choices();
-                        var false_choices = instruction.create_false_choices();
-                        add(true_choices);
-                        add(false_choices);
-
-                        true_choices.center_on_screen();
-                        false_choices.center_on_screen();
-                }
 
                 var level_box = new ScrollBox(8);
                 level_box.position = new FlxPoint(buttons_x, Config.FRAME);
@@ -129,11 +122,19 @@ class PlayState extends FlxState
                 level_box.select(0);
                 add(level_box);
 
-                m_dim = new FlxSprite();
-                m_dim.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-                m_dim.alpha = DIM_ALPHA;
-                m_dim.visible = false;
                 add(m_dim);
+
+                // create_choices should be execute after creation of all instructions and buttons,
+                // so choices will be on top of every instruction (prevent sprite overlapping)
+                for (instruction in m_instructions) {
+                        var true_choices = instruction.create_true_choices();
+                        var false_choices = instruction.create_false_choices();
+                        add(true_choices);
+                        add(false_choices);
+
+                        true_choices.center_on_screen();
+                        false_choices.center_on_screen();
+                }
 
                 m_phase = new Array<Void->Void>();
                 m_phase.push(phase_1_goto_instruction);
@@ -258,8 +259,8 @@ class PlayState extends FlxState
                 }
 
                 switch (m_speed) {
-                case NORMAL (i): m_speed_button.label.text = "SPEED " + i;
-                case MAX: m_speed_button.label.text = "SPEED MAX";
+                case NORMAL (i): m_speed_button.label.text = "PREDKOSC " + i;
+                case MAX: m_speed_button.label.text = "PREDKOSC MAX";
                 }
         }
 
