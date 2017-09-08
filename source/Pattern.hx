@@ -309,7 +309,6 @@ class Pattern extends FlxGroup
 
                 switch (_action) {
                 case GO:
-                        trace("GO");
                         var pos:TilePosition = {x: m_mover.position.x, y: m_mover.position.y};
                         var movement:TilePosition;
 

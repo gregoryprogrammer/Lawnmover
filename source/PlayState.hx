@@ -98,13 +98,13 @@ class PlayState extends FlxState
                 add(stop);
 
                 var reset = new FlxButton(buttons_x, buttons_y + b_gap * 2, "SKASUJ", clear_program);
-                add(reset);
+                //add(reset);
 
                 m_speed_button = new FlxButton(buttons_x, buttons_y + b_gap * 3, "PREDKOSC 4", on_speed_button);
                 add(m_speed_button);
 
                 var level_box = new ScrollBox(8);
-                level_box.position = new FlxPoint(buttons_x, Config.FRAME);
+                level_box.position = new FlxPoint(buttons_x, Config.FRAME * 2);
 
                 var files = openfl.Assets.list();
                 var level_files = new Array<String>();
@@ -130,6 +130,12 @@ class PlayState extends FlxState
                 level_box.select(0);
                 add(level_box);
 
+                var txt_levels = new FlxText();
+                txt_levels.x = level_box.position.x;
+                txt_levels.y = level_box.position.y - Config.FRAME;
+                txt_levels.text = "POZIOMY";
+                add(txt_levels);
+
                 add(m_dim);
 
                 // create_choices should be execute after creation of all instructions and buttons,
@@ -143,6 +149,55 @@ class PlayState extends FlxState
                         true_choices.center_on_screen();
                         false_choices.center_on_screen();
                 }
+
+                var program_box = new ScrollBox(8);
+                program_box.position = new FlxPoint(buttons_x + 250, Config.FRAME * 2);
+                program_box.add_entry("Pusty", function()
+                        {
+                            clear_program();
+                        });
+                program_box.add_entry("Spirala", function()
+                        {
+                            clear_program();
+
+                            var tiles00 = m_instructions[0].pattern.get_tiles();
+                            var tiles01 = m_instructions[1].pattern.get_tiles();
+                            var tiles02 = m_instructions[2].pattern.get_tiles();
+                            var tiles03 = m_instructions[3].pattern.get_tiles();
+
+                            // 00
+                            m_instructions[0].action_true = CUT;
+                            tiles00[4].type = GRASS;
+
+                            // 01
+                            m_instructions[1].action_true = GO;
+                            tiles01[1].type = GRASS;
+
+                            // 02
+                            m_instructions[2].action_true = TURN_RIGHT;
+                            tiles02[1].type = WALL;
+
+                            // 03
+                            m_instructions[3].action_true = TURN_RIGHT;
+                            tiles03[1].type = CUT;
+
+                            // 04
+                            m_instructions[4].action_false = JUMP(0);
+
+                            m_instructions[0].pattern.set_tiles(tiles00);
+                            m_instructions[1].pattern.set_tiles(tiles01);
+                            m_instructions[2].pattern.set_tiles(tiles02);
+                            m_instructions[3].pattern.set_tiles(tiles03);
+
+                        });
+                program_box.select(0);
+                add(program_box);
+
+                var txt_programs = new FlxText();
+                txt_programs.x = program_box.position.x;
+                txt_programs.y = program_box.position.y - Config.FRAME;
+                txt_programs.text = "PROGRAMY";
+                add(txt_programs);
 
                 m_phase = new Array<Void->Void>();
                 m_phase.push(phase_1_goto_instruction);
@@ -309,6 +364,7 @@ class PlayState extends FlxState
 
         function on_stop_button():Void
         {
+                load_level(Reg.level);
                 m_current_instruction = 0;
                 m_started = false;
                 move_arrow();
