@@ -272,6 +272,13 @@ class PlayState extends FlxState
                                 m_current_phase %= m_phase.length;
                         }
                 }
+
+                if (m_speed == MAX) {
+                    m_arrow.visible = false;
+                }
+                else {
+                    m_arrow.visible = true;
+                }
         }
 
         function run_continous():Void
