@@ -190,6 +190,49 @@ class PlayState extends FlxState
                             m_instructions[3].pattern.set_tiles(tiles03);
 
                         });
+                program_box.add_entry("Szymon", function()
+                        {
+                            clear_program();
+
+                            var tiles00 = m_instructions[0].pattern.get_tiles();
+                            var tiles01 = m_instructions[1].pattern.get_tiles();
+                            var tiles02 = m_instructions[2].pattern.get_tiles();
+                            var tiles03 = m_instructions[3].pattern.get_tiles();
+                            var tiles04 = m_instructions[4].pattern.get_tiles();
+                            var tiles05 = m_instructions[5].pattern.get_tiles();
+
+                            // 00
+                            m_instructions[0].action_true = TURN_LEFT;
+                            tiles00[3].type = GRASS;
+
+                            // 01
+                            m_instructions[1].action_true = CUT;
+                            tiles01[4].type = GRASS;
+
+                            // 02
+                            m_instructions[2].action_true = GO;
+                            tiles02[1].type = GRASS;
+                            
+                            // 03
+                            m_instructions[3].action_true = TURN_RIGHT;
+                            tiles03[1].type = WALL;
+
+                            // 04
+                            m_instructions[4].action_true = TURN_RIGHT;
+                            tiles04[1].type = CUT;
+                            tiles04[4].type = CUT;
+                            tiles04[7].type = CUT;
+
+                            // 05
+                            m_instructions[5].action_false = JUMP(0);
+
+                            m_instructions[0].pattern.set_tiles(tiles00);
+                            m_instructions[1].pattern.set_tiles(tiles01);
+                            m_instructions[2].pattern.set_tiles(tiles02);
+                            m_instructions[3].pattern.set_tiles(tiles03);
+                            m_instructions[4].pattern.set_tiles(tiles04);
+                            m_instructions[5].pattern.set_tiles(tiles05);
+                        });
                 program_box.select(0);
                 add(program_box);
 
