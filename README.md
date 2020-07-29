@@ -1,6 +1,6 @@
-# Lawnmover
+# Lawnmower
 
-Lawnmover simulator - proof of concept.
+Lawnmower simulator - proof of concept.
 
 It is playable. Levels are solvable. Some experience is enjoyable.
 

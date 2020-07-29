@@ -7,7 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 
 import Config.Config;
-import Pattern.MoverAction;
+import Pattern.MowerAction;
 
 
 
@@ -84,7 +84,7 @@ class Instruction extends FlxGroup
 
                 pattern = new Pattern(3, 3);
                 pattern.position = new FlxPoint(x + FRAME + 16, y + FRAME);
-                pattern.move_mover_to({x:1, y:1});
+                pattern.move_mower_to({x:1, y:1});
 
                 // 20 = button height
                 m_action_true = new FlxButton(x + FRAME + 16 + 48 + 16, y + FRAME, "ACTION", on_true_action_choice);

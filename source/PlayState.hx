@@ -303,15 +303,15 @@ class PlayState extends FlxState
         {
                 switch (action) {
                 case PASS:
-                        m_main_pattern.mover_action(PASS);
+                        m_main_pattern.mower_action(PASS);
                 case GO:
-                        m_main_pattern.mover_action(GO);
+                        m_main_pattern.mower_action(GO);
                 case TURN_LEFT:
-                        m_main_pattern.mover_action(TURN_LEFT);
+                        m_main_pattern.mower_action(TURN_LEFT);
                 case TURN_RIGHT:
-                        m_main_pattern.mover_action(TURN_RIGHT);
+                        m_main_pattern.mower_action(TURN_RIGHT);
                 case CUT:
-                        m_main_pattern.mover_action(CUT);
+                        m_main_pattern.mower_action(CUT);
                 case JUMP(i):
                         m_current_instruction = i;
                 }
@@ -322,7 +322,7 @@ class PlayState extends FlxState
          */
         function phase_1_goto_instruction():Void
         {
-                // TODO check main conditions, ex: lawnmover crash on wall
+                // TODO check main conditions, ex: lawnmower crash on wall
                 // TODO 1. highlight current instruction
 
                 // TODO if debug
@@ -342,10 +342,10 @@ class PlayState extends FlxState
 
                 var pattern = instruction.pattern;
 
-                var main_mover_area = m_main_pattern.mover_area();
-                var instr_mover_area = pattern.mover_area();
+                var main_mower_area = m_main_pattern.mower_area();
+                var instr_mower_area = pattern.mower_area();
 
-                var match = Pattern.match(main_mover_area, instr_mover_area);
+                var match = Pattern.match(main_mower_area, instr_mower_area);
 
                 // 3. If match then action (ride, turn)
 

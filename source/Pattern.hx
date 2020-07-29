@@ -19,7 +19,7 @@ enum Direction {
         WEST;
 }
 
-enum MoverAction {
+enum MowerAction {
         PASS;
         GO;
         TURN_LEFT;
@@ -27,7 +27,7 @@ enum MoverAction {
         CUT;
 }
 
-typedef Mover = {
+typedef Mower = {
         var sprite:FlxSprite;
         var position:TilePosition;
         var direction:Direction;
@@ -47,8 +47,8 @@ class Pattern extends FlxGroup
         private var m_height:Int;
         private var m_tiles:Array<Tile>;
 
-        private var m_mover:Mover;
-        public var mover_freeze:Bool = true;
+        private var m_mower:Mower;
+        public var mower_freeze:Bool = true;
         public var edit_mode(default, set):Bool = false;
 
         static public function match(_area_master:Array<TileType>, _area_slave:Array<TileType>):Comparison
@@ -94,10 +94,10 @@ class Pattern extends FlxGroup
                         add(tile);
                 }
 
-                // lawnmover
-                m_mover = {sprite: new FlxSprite(), position: {x: 0, y: 0}, direction: NORTH};
-                m_mover.sprite.loadGraphic("assets/images/mover.png");
-                add(m_mover.sprite);
+                // lawnmower
+                m_mower = {sprite: new FlxSprite(), position: {x: 0, y: 0}, direction: NORTH};
+                m_mower.sprite.loadGraphic("assets/images/mower.png");
+                add(m_mower.sprite);
 
                 // default position
                 // FIXME get rid of this (how?)
@@ -123,16 +123,16 @@ class Pattern extends FlxGroup
         {
                 super.update(_elapsed);
 
-                // draw mover sprite according to its tile position
-                m_mover.sprite.x = position.x + m_mover.position.x * Config.TILE_SIZE;
-                m_mover.sprite.y = position.y + m_mover.position.y * Config.TILE_SIZE;
+                // draw mower sprite according to its tile position
+                m_mower.sprite.x = position.x + m_mower.position.x * Config.TILE_SIZE;
+                m_mower.sprite.y = position.y + m_mower.position.y * Config.TILE_SIZE;
 
-                // set mover angle according to its direction
-                switch (m_mover.direction) {
-                case NORTH: m_mover.sprite.angle = 0;
-                case EAST:  m_mover.sprite.angle = 90;
-                case SOUTH: m_mover.sprite.angle = 180;
-                case WEST:  m_mover.sprite.angle = 270;
+                // set mower angle according to its direction
+                switch (m_mower.direction) {
+                case NORTH: m_mower.sprite.angle = 0;
+                case EAST:  m_mower.sprite.angle = 90;
+                case SOUTH: m_mower.sprite.angle = 180;
+                case WEST:  m_mower.sprite.angle = 270;
                 }
 
                 if (edit_mode) {
@@ -145,26 +145,26 @@ class Pattern extends FlxGroup
 
                         } else if (FlxG.mouse.justPressedRight && is_mouse_in_field()) {
 
-                                if (!mover_freeze) mover_user_control();
+                                if (!mower_freeze) mower_user_control();
 
                         }
                 }
         }
 
         // should be enabled in playfield edit mode
-        // allows to place and rotate mover with mouse
-        function mover_user_control():Void
+        // allows to place and rotate mower with mouse
+        function mower_user_control():Void
         {
                 // FIXME to function
                 var mouse_tile = mouse_to_tile_pos();
-                //trace("tile_pos = " + mouse_tile + "   m_mover.position = " + m_mover.position);
+                //trace("tile_pos = " + mouse_tile + "   m_mower.position = " + m_mower.position);
 
-                var already_in_place = mouse_tile.x == m_mover.position.x && mouse_tile.y == m_mover.position.y;
+                var already_in_place = mouse_tile.x == m_mower.position.x && mouse_tile.y == m_mower.position.y;
 
                 if (already_in_place) {
-                        rotate_mover_cw();
+                        rotate_mower_cw();
                 } else {
-                        move_mover_to(mouse_tile);
+                        move_mower_to(mouse_tile);
                 }
         }
 
@@ -230,8 +230,8 @@ class Pattern extends FlxGroup
                         else if (i >= TILES - m_width) m_tiles[i].type = WALL;
                         else m_tiles[i].type = GRASS;
                 }
-                move_mover_to({x:1, y:m_height - 2});
-                m_mover.direction = EAST;
+                move_mower_to({x:1, y:m_height - 2});
+                m_mower.direction = EAST;
         }
 
         public function load_lawn(_width:Int, _height:Int, _data:Array<Int>):Void
@@ -260,18 +260,18 @@ class Pattern extends FlxGroup
                         }
                 }
 
-                // TODO find first GRASS and place lawnmover there
+                // TODO find first GRASS and place lawnmower there
                 for (i in 0...(m_width * m_height)) {
 
                         if (m_tiles[i].type != GRASS) continue;
 
                         var x = i % m_width;
                         var y = Std.int(i / m_width);
-                        move_mover_to({x:x, y:y});
+                        move_mower_to({x:x, y:y});
                         break;
                 }
 
-                m_mover.direction = EAST;
+                m_mower.direction = EAST;
         }
 
         function in_range(_position:TilePosition):Bool
@@ -284,26 +284,26 @@ class Pattern extends FlxGroup
                 return true;
         }
 
-        public function move_mover_to(_position:TilePosition):Void
+        public function move_mower_to(_position:TilePosition):Void
         {
                 if (in_range(_position)) {
-                        m_mover.position = _position;
-                        //trace("MOVER MOVE TO " + _position);
+                        m_mower.position = _position;
+                        //trace("MOWER MOVE TO " + _position);
                 } else {
                         // TODO sound or something
                 }
         }
 
-        public function mover_action(_action:MoverAction):Void
+        public function mower_action(_action:MowerAction):Void
         {
 
                 switch (_action) {
                 case GO:
                         trace("GO");
-                        var pos:TilePosition = {x: m_mover.position.x, y: m_mover.position.y};
+                        var pos:TilePosition = {x: m_mower.position.x, y: m_mower.position.y};
                         var movement:TilePosition;
 
-                        switch (m_mover.direction) {
+                        switch (m_mower.direction) {
                         case NORTH: movement = {x:  0, y: -1};
                         case EAST:  movement = {x:  1, y:  0};
                         case SOUTH: movement = {x:  0, y:  1};
@@ -313,18 +313,18 @@ class Pattern extends FlxGroup
                         pos.x += movement.x;
                         pos.y += movement.y;
 
-                        move_mover_to(pos);
+                        move_mower_to(pos);
 
                 case TURN_LEFT:
                         trace("TURN LEFT");
-                        rotate_mover_ccw();
+                        rotate_mower_ccw();
 
                 case TURN_RIGHT:
                         trace("TURN RIGHT");
-                        rotate_mover_cw();
+                        rotate_mower_cw();
                 case CUT:
                         trace("CUT");
-                        var tile = get_tile(m_mover.position);
+                        var tile = get_tile(m_mower.position);
                         if (tile != null && tile.type == GRASS) {
                                 tile.set_type(CUT);
                         }
@@ -332,23 +332,23 @@ class Pattern extends FlxGroup
                 }
         }
 
-        private function rotate_mover_cw():Void
+        private function rotate_mower_cw():Void
         {
-                switch (m_mover.direction) {
-                case NORTH: m_mover.direction = EAST;
-                case EAST: m_mover.direction = SOUTH;
-                case SOUTH: m_mover.direction = WEST;
-                case WEST: m_mover.direction = NORTH;
+                switch (m_mower.direction) {
+                case NORTH: m_mower.direction = EAST;
+                case EAST: m_mower.direction = SOUTH;
+                case SOUTH: m_mower.direction = WEST;
+                case WEST: m_mower.direction = NORTH;
                 }
         }
 
-        private function rotate_mover_ccw():Void
+        private function rotate_mower_ccw():Void
         {
-                switch (m_mover.direction) {
-                case NORTH: m_mover.direction = WEST;
-                case EAST: m_mover.direction = NORTH;
-                case SOUTH: m_mover.direction = EAST;
-                case WEST: m_mover.direction = SOUTH;
+                switch (m_mower.direction) {
+                case NORTH: m_mower.direction = WEST;
+                case EAST: m_mower.direction = NORTH;
+                case SOUTH: m_mower.direction = EAST;
+                case WEST: m_mower.direction = SOUTH;
                 }
         }
 
@@ -365,9 +365,9 @@ class Pattern extends FlxGroup
                 return area;
         }
 
-        public function mover_area():Array<TileType>
+        public function mower_area():Array<TileType>
         {
-                var pos = m_mover.position;
+                var pos = m_mower.position;
 
                 var pos0:TilePosition = {x: pos.x - 1, y: pos.y - 1};
                 var pos1:TilePosition = {x: pos.x - 0, y: pos.y - 1};
@@ -394,7 +394,7 @@ class Pattern extends FlxGroup
 
                 var tiles:Array<Tile>;
 
-                switch (m_mover.direction) {
+                switch (m_mower.direction) {
                         case NORTH: tiles = [t0, t1, t2, t3, t4, t5, t6, t7, t8];
                         case EAST:  tiles = [t2, t5, t8, t1, t4, t7, t0, t3, t6];
                         case SOUTH: tiles = [t8, t7, t6, t5, t4, t3, t2, t1, t0];
