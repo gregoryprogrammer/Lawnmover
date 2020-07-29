@@ -36,7 +36,9 @@ class PlayState extends FlxState
 
         private var m_current_instruction = 0;
 
-        private var m_speed_button:FlxButton;
+        private var m_speed_up_button:FlxButton;
+        private var m_slow_down_button:FlxButton;
+        private var m_speed_text:FlxText;
         private var m_speed:Speed = NORMAL (1);
 
         var m_started = false;
@@ -88,8 +90,14 @@ class PlayState extends FlxState
                 var reset = new FlxButton(buttons_x, buttons_y + b_gap * 2, "CLEAR PROG", clear_program);
                 add(reset);
 
-                m_speed_button = new FlxButton(buttons_x, buttons_y + b_gap * 3, "SPEED 1", on_speed_button);
-                add(m_speed_button);
+                m_slow_down_button = new FlxButton(buttons_x, buttons_y + b_gap * 3, "SLOW DOWN", on_slown_down_button);
+                add(m_slow_down_button);
+
+                m_speed_up_button = new FlxButton(buttons_x + m_slow_down_button.width, buttons_y + b_gap * 3, "SPEED UP", on_speed_up_button);
+                add(m_speed_up_button);
+
+                m_speed_text = new FlxText(m_speed_up_button.x + m_speed_up_button.width, buttons_y + b_gap * 3 + 2, "SPEED 1");
+                add(m_speed_text);
 
                 // create_choices should be execute after creation of all instructions and buttons,
                 // so choices will be on top of every instruction (prevent sprite overlapping)
@@ -244,7 +252,26 @@ class PlayState extends FlxState
                 m_started = false;
         }
 
-        function on_speed_button():Void
+        function on_slown_down_button():Void
+        {
+                switch (m_speed) {
+                case NORMAL (i):
+                        switch (i) {
+                        case 2: m_speed = NORMAL (1);
+                        case 4: m_speed = NORMAL (2);
+                        case 8: m_speed = NORMAL (4);
+                        case 16: m_speed = NORMAL (8);
+                        }
+                case MAX: m_speed = NORMAL (16);
+                }
+
+                switch (m_speed) {
+                case NORMAL (i): m_speed_text.text = "SPEED " + i;
+                case MAX: m_speed_text.text = "SPEED MAX";
+                }
+        }
+
+        function on_speed_up_button():Void
         {
                 switch (m_speed) {
                 case NORMAL (i):
@@ -252,14 +279,15 @@ class PlayState extends FlxState
                         case 1: m_speed = NORMAL (2);
                         case 2: m_speed = NORMAL (4);
                         case 4: m_speed = NORMAL (8);
-                        case 8: m_speed = MAX;
+                        case 8: m_speed = NORMAL (16);
+                        case 16: m_speed = MAX;
                         }
-                case MAX: m_speed = NORMAL (1);
+                case MAX: m_speed = MAX;
                 }
 
                 switch (m_speed) {
-                case NORMAL (i): m_speed_button.label.text = "SPEED " + i;
-                case MAX: m_speed_button.label.text = "SPEED MAX";
+                case NORMAL (i): m_speed_text.text = "SPEED " + i;
+                case MAX: m_speed_text.text = "SPEED MAX";
                 }
         }
 
